@@ -1,0 +1,4 @@
+.db
+.vscode/
+build/
+log/
