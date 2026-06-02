@@ -25,7 +25,11 @@ setup(
     entry_points={
         'console_scripts': [
             "py_node=py_pkg.my_firstnode:main",
-            
+            "news_station=py_pkg.news_station:main",
+            "smartphone=py_pkg.smartphone:main",
+            "add_two_int_server=py_pkg.add_two_int_server:main",
+            "add_two_ints_client_no_oop=py_pkg.add_two_ints_client_no_oop:main",
+           "add_two_ints_client_oop=py_pkg.add_two_ints_client_oop:main",
         ],
     },
 )
