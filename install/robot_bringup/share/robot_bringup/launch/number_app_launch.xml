@@ -1,8 +1,9 @@
 <launch>
 
 <node pkg="py_pkg" exec="number_publisher" name="number_publisher" output="screen" />
+    <remap from="/number_publisher/number" to="/number" />
 <node pkg="cpp_pkg" exec="smartphone" name="smartphone" output="screen" />
-
+    <remap from="/number_publisher/number" to="/number" /> 
 
 
 
