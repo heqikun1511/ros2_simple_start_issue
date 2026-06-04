@@ -1,0 +1,14 @@
+<launch>
+
+<node pkg="py_pkg" exec="number_publisher" name="number_publisher" output="screen" />
+<node pkg="cpp_pkg" exec="smartphone" name="smartphone" output="screen" />
+
+
+
+
+
+
+
+
+
+</launch>
