@@ -1,5 +1,5 @@
 <launch>
-    <let name="urdf_path" value="$(find-pkg-share robot_description)/urdf/robot.urdf" />
+    <let name="urdf_path" value="$(find-pkg-share robot_description)/urdf/robot.urdf.xacro" />
 
     <!-- robot_state_publisher: 加载并发布机器人状态 -->
     <node pkg="robot_state_publisher" exec="robot_state_publisher">
