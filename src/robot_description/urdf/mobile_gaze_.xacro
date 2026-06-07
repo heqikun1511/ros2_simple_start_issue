@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmmlns:xacro="https://ros.org/wiki/xacro" name="mobile_gaze">
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/mobile_gaze</robotNamespace>\
+            <left_joint>left_wheel_joint</left_joint>
+            <right_joint>right_wheel_joint</right_joint>
+            <wheel_separation>0.34</wheel_separation>
+            <wheel_radius>0.1</wheel_radius>
+            <frame_id>base_link</frame_id>
+            <child_frame_id>odom</child_frame_id`>
+        </plugin>
+    </gazebo>
+</robot>
