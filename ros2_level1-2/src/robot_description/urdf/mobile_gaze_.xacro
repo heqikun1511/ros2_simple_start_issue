@@ -12,4 +12,14 @@
             <child_frame_id>odom</child_frame_id`>
         </plugin>
     </gazebo>
+
+
+
+    
+    <gazebo>
+        <plugin 
+                filename="libgazebo_ros_control.so"
+                name="gazebo_ros_control">
+        </plugin>
+    </gazebo>
 </robot>
