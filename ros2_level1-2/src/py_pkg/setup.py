@@ -31,6 +31,8 @@ setup(
             "add_two_ints_client_no_oop=py_pkg.add_two_ints_client_no_oop:main",
            "add_two_ints_client_oop=py_pkg.add_two_ints_client_oop:main",
            "number_publisher=py_pkg.number_publisher:main",
+           "number_counter= py_pkg.number_counter:main",
+           ""
         ],
     },
 )
