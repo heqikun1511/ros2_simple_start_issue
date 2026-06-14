@@ -2,17 +2,17 @@ import rclpy
 import time
 import threading
 from rclpy.node import Node
-from rclpy.action import ActionServer, GoalResponse, CancelResponse
-from rclpy.action.server import ServerGoalHandle
-from rclpy.executors import MultiThreadedExecutor
-from robot_interface.action import CountUntil
+from rclpy.action import ActionServer, GoalResponse, CancelResponse#目标相应枚举     取消相应枚举
+from rclpy.action.server import ServerGoalHandle      #服务端目标句柄
+from rclpy.executors import MultiThreadedExecutor          #多线程执行
+from robot_interface.action import CountUntil           #自定义接口
 
 
 class CountUntilServerNode(Node):
     def __init__(self):
         super().__init__("count_until_server")
         self.goal_lock_ = threading.Lock()
-        self.goal_handle_ = None
+        self.goal_handle_ = None#初始化
         self.count_until_server_ = ActionServer(
             self,
             CountUntil,
