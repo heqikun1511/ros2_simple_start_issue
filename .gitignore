@@ -2,6 +2,6 @@
 .vscode/
 build/
 log/
-*.txt
+
 *.sh
 install/

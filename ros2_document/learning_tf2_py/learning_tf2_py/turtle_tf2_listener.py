@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import math
+import time
 
 from geometry_msgs.msg import Twist
 
@@ -24,6 +25,8 @@ from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener
 
 from turtlesim.srv import Spawn
+
+from tf2_ros import LookupException, ConnectivityException, ExtrapolationException
 
 
 class FrameListener(Node):
@@ -66,11 +69,12 @@ class FrameListener(Node):
                     t = self.tf_buffer.lookup_transform(
                         to_frame_rel,
                         from_frame_rel,
-                        rclpy.time.Time())
-                except TransformException as ex:
-                    self.get_logger().info(
-                        f'Could not transform {to_frame_rel} to {from_frame_rel}: {ex}')
-                    return
+                        now,
+                        timeout=rclpy.Duration.Duration(seconds))
+                except (LookupException, ConnectivityException, ExtrapolationException):
+                        self.get_logger().info('transform not ready')
+                        raise
+                        return
 
                 msg = Twist()
                 scale_rotation_rate = 1.0#角速度比例系数

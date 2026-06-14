@@ -63,7 +63,7 @@ private:
     // Store frame names in variables that will be used to
     // compute transformations
     std::string fromFrameRel = target_frame_.c_str();
-    std::string toFrameRel = "turtle2";
+    std::string toFrameRel = "turtle3";
 
     if (turtle_spawning_service_ready_) {
       if (turtle_spawned_) {
