@@ -8,7 +8,7 @@ class Smartphone: public rclcpp::Node
 {
   public:
   Smartphone():Node("smartphone")
-  {
+  {//
     subscriber_=this->create_subscription<example_interfaces::msg::String>("smartphone_news",10,
       std::bind(&Smartphone::callbacknews,this,std::placeholders::_1));
       RCLCPP_INFO(this->get_logger(), "Smartphone node has been started.");
