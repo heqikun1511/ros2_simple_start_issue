@@ -14,10 +14,10 @@ public:
   {
   
     auto options = rclcpp::SubscriptionOptions();//自定义订阅行为
-    options.topic_stats_options.state = rclcpp::TopicStatisticsState::Enable;//自动收集订阅统计数据
+    options.topic_stats_options.state = rclcpp::TopicStatisticsState::Enable;//自动收集订阅统计数据，自动创建隐藏的publisher发布
 
     
-    options.topic_stats_options.publish_period = std::chrono::seconds(10);//发布周期为10sec
+    options.topic_stats_options.publish_period = std::chrono::seconds(10);//发布周期为10sec，发布统计结果
 
   
 
@@ -31,7 +31,7 @@ public:
   }
 //topic_callback 是一个成员函数（有 this 指针），不能直接像普通函数那样传递给 
 //create_subscription。这里用 Lambda 包裹一层，相当于做了一个适配器，把成员函数的调用包装成可传递的函数对象。
-private:
+private:                                                                                                                                                                                   
   void topic_callback(const std_msgs::msg::String::SharedPtr msg) const
   {
     RCLCPP_INFO(this->get_logger(), "I heard: '%s'", msg->data.c_str());

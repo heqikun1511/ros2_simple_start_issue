@@ -44,3 +44,38 @@ int main(int args, char **argv)
     rclcpp::shutdown();
     return 0;
 }
+
+
+
+
+
+class add_two_intsClientNode :public rclcpp::Noode
+{
+    public:
+   add_two_intsClientNode() : Node("add_two_ints_client"){
+
+    client_=this->create_client<example_interfaces::srv::AddTwoInts>("add_two_ints");
+    }
+
+void call_add_two_ints(int a , int b){
+
+    auto request_=std::make_shared<example_interfaces::srv::AddTwoints>();
+    request->a=a;
+    request->b=b;
+
+    auto result_future=client_->async_send_request(request);
+    if(rclcpp::spin_until_future_complete(this->get_node_base_interface(),result_future)==rclcpp::FutureReturnCode::SUCCESS){
+        RCLCPP_INFO(this->get_logger(),"result is %d",result_future.get()->sum);
+        
+    }
+    else{
+        RCLCPP_ERROR(this->get_logger(),"fail to call service");
+
+
+}
+
+}
+
+}
+
+

@@ -6,7 +6,7 @@ class Newsstation : public rclcpp::Node
 
 public:
     Newsstation() : Node("newsstation")
-    {   this->declare_parameter("timer_period", 1);
+    {   this->declare_parameter("timer_period", 1);//可以通过命令行动态修改
         publisher_ = this->create_publisher<example_interfaces::msg::String>("news", 10);
         timer_ = this->create_wall_timer(std::chrono::seconds(this->get_parameter("timer_period").as_int()), std::bind(&Newsstation::pulish_news, this));
         RCLCPP_INFO(this->get_logger(), "News station has been started.");

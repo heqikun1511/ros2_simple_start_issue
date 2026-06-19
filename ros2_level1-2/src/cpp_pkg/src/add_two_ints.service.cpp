@@ -18,6 +18,8 @@ void callbacknews(const example_interfaces::srv::AddTwoInts::Request::SharedPtr 
 {
 response->sum=request->a+request->b;
     RCLCPP_INFO(this->get_logger(),"request: a=%ld, b=%ld",request->a,request->b);
+    //request->a=100;
+    //request->b =200;    直接修改a 和b 的值
 }
   rclcpp::Service<example_interfaces::srv::AddTwoInts>::SharedPtr service_;
 };
