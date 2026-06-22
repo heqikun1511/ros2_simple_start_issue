@@ -1,0 +1,5 @@
+<launch>
+    <let name="urdf_path" 
+    value="${find-pkg-share robot_description/urdf/my_robot.urdf}"/>
+    
+</launch>
