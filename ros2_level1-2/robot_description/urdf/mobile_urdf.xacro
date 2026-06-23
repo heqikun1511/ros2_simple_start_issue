@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- 属性定义 -->
+  <xacro:property name="basic_length" value="0.6"/>
+  <xacro:property name="basic_width" value="0.4"/>
+  <xacro:property name="basic_height" value="0.2"/>
+  <xacro:property name="wheel_radius" value="0.1"/>
+  <xacro:property name="wheel_length" value="0.05"/>
+  <xacro:property name="wheel_mass" value="0.5"/>
+  <xacro:property name="caster_mass" value="0.1"/>
+
+  <!-- ================= base_link (车身) ================= -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="${basic_length} ${basic_width} ${basic_height}"/>
+      </geometry>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${basic_length} ${basic_width} ${basic_height}"/>
+      </geometry>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="5.0"/>
+      <origin xyz="0 0 ${basic_height/2.0}" rpy="0 0 0"/>
+      <inertia ixx="${(5.0/12)*(basic_width*basic_width+basic_height*basic_height)}" ixy="0" ixz="0"
+               iyy="${(5.0/12)*(basic_length*basic_length+basic_height*basic_height)}" iyz="0"
+               izz="${(5.0/12)*(basic_length*basic_length+basic_width*basic_width)}"/>
+    </inertial>
+  </link> 
+
+  <link name="base_footprint"/>
+
+  <link name="rightwheel_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <!-- pi/2 = 1.57 -->
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="${(0.5/12)*(3*0.1*0.1+0.05*0.05)}" ixy="0" ixz="0"
+               iyy="${(0.5/12)*(3*0.1*0.1+0.05*0.05)}" iyz="0"
+               izz="${(0.5/2)*0.1*0.1}"/>
+    </inertial>
+  </link>
+
+  <link name="leftwheel_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <origin xyz="${-basic_length/4.0} 0.225 0" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="${(0.5/12)*(3*0.1*0.1+0.05*0.05)}" ixy="0" ixz="0"
+               iyy="${(0.5/12)*(3*0.1*0.1+0.05*0.05)}" iyz="0"
+               izz="${(0.5/2)*0.1*0.1}"/>
+    </inertial>
+  </link>
+
+  <link name="caster_wheel_link">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin xyz="0.2 0 0" rpy="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="${(2.0/5.0)*0.1*0.05*0.05}" ixy="0" ixz="0"
+               iyy="${(2.0/5.0)*0.1*0.05*0.05}" iyz="0"
+               izz="${(2.0/5.0)*0.1*0.05*0.05}"/>
+    </inertial>
+  </link>
+
+  <joint name="base_rightwheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rightwheel_link"/>
+    <origin xyz="${-basic_length/4.0} -0.225 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="base_leftwheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="leftwheel_link"/>
+    <origin xyz="${-basic_length/4.0} 0.225 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <joint name="base_caster_wheel_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_wheel_link"/>
+    <origin xyz="${-basic_length/3.0} 0 -0.05" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="-0.15 -0.225 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>
+    
+    
